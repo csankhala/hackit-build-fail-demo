@@ -1,8 +1,12 @@
 ## This is prototype to demonstrate AI-Powered Build Failure Diagnostic Tool
 
-### Install Ollama for Local GenAI execution
+### Install Ollama for executing large language models locally
 1. Follow official guide here: https://github.com/ollama/ollama
-2. Start service locally: `./ollama serve`
+2. Install model using below command
+    ```shell
+    ollama pull llama2
+    ```
+3. Start service locally: `./ollama serve`
     - By default it starts ollama service on port `11434`
     - REST API detail: https://github.com/ollama/ollama?tab=readme-ov-file#rest-api
 
