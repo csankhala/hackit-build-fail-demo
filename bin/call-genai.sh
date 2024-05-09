@@ -1,6 +1,9 @@
 #!/bin/bash
-
-echo "Calling GenAI with the error log."
+printf '*%.0s' {1..120}
+echo ""
+echo "Calling GenAI with the error log..."
+printf '*%.0s' {1..120}
+echo ""
 
 # Call the curl command
 response=$(curl -X POST http://localhost:11434/api/generate -d '
@@ -15,11 +18,12 @@ response_field=$(echo "$response" | grep -o '"response":"[^"]*' | grep -o '[^"]*
 
 escaped_response=$(printf '%b\n' "$response_field")
 
-# Print the response field
+printf '*%.0s' {1..120}
+echo ""
 echo "Some possible fixes from GenAI: "
 # print line
 printf '*%.0s' {1..120}
-echo
-echo $escaped_response
+echo "$escaped_response"
 # print line
 printf '*%.0s' {1..120}
+echo ""
