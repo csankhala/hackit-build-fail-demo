@@ -8,8 +8,8 @@ echo ""
 # Call the curl command
 response=$(curl -X POST http://localhost:11434/api/generate -d '
 {
-  "model": "llama2",
-  "prompt":"Analyzing Maven Build Failure: '"$1"'. Provide 3 potential solutions or quick fixes.",
+  "model": "llama3",
+  "prompt":"Analyze Maven Build Failure: '"$1"'. Provide 2 potential solutions as line items",
   "stream": false
  }'
 )
@@ -21,6 +21,7 @@ escaped_response=$(printf '%b\n' "$response_field")
 printf '*%.0s' {1..120}
 echo ""
 echo "Some possible fixes from GenAI: "
+echo ""
 # print line
 printf '*%.0s' {1..120}
 echo "$escaped_response"
