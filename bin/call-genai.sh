@@ -16,15 +16,18 @@ response=$(curl -X POST http://localhost:11434/api/generate -d '
 # Extract the response field from the JSON response
 response_field=$(echo "$response" | grep -o '"response":"[^"]*' | grep -o '[^"]*$')
 
-escaped_response=$(printf '%b\n' "$response_field")
+# Replace unicode escape sequences with actual characters
+response_field=${response_field//\\u003c/\<}
+response_field=${response_field//\\u003e/\>}
 
 printf '*%.0s' {1..120}
 echo ""
 echo "Some possible fixes from GenAI: "
-echo ""
 # print line
 printf '*%.0s' {1..120}
-echo "$escaped_response"
+echo ""
+printf "$response_field"
+echo ""
 # print line
 printf '*%.0s' {1..120}
 echo ""
