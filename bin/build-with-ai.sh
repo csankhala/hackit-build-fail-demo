@@ -10,6 +10,9 @@ while IFS= read -r line; do
     if [[ "$line" == *"To see the full stack trace of the errors, re-run Maven with the -e switch."* ]]; then
       break
     fi
+    if [[ "$line" == *"OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended"* ]]; then
+      continue
+    fi
     if [[ "$line" == *"[INFO]"* ]]; then
       continue
     fi
@@ -23,7 +26,7 @@ IFS=' '; error_payload="${error_lines[*]}"
 
 if [ -n "$error_payload" ]; then
     echo "Maven build has failed!"
-    echo "For more details, please check the build logs"
+    echo "For more details, please check the build logs: $error_payload"
     # Call GenAI script here, passing the error message as an argument
     bin/call-genai.sh "$error_payload"
 fi
